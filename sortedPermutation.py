@@ -39,7 +39,22 @@ def sortCharacters(word):
     lowerCase.sort()
     sortedArray=numeric+upperCase+lowerCase
     print(sortedArray)
+    print(permute(sortedArray))
 
+def permute(lst):
+    if len(lst)==0:
+        return []
+    elif len(lst)==1:
+        return lst
+    else:
+        permutedArray=[]
+        for i in range(len(lst)):
+            consideredCharacter=lst[i]
+            otherCharacters = lst[:i]+lst[i+1:]
+            for permutation in permute(otherCharacters):
+                print(permutation)
+                permutedArray.append(consideredCharacter+permutation)
+        return permutedArray
 
 def main(argv):
     inputfile = ''

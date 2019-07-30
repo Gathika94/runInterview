@@ -1,11 +1,44 @@
 import sys, getopt
 
+def split(word):
+    return [char for char in word]
 
 def readFile(filename):
     file = open(filename, 'r')
-    for line in file:
+    lines = file.read().splitlines();
+    for line in lines:
         print("nl")
         print(line)
+        word = line
+        sortCharacters(word)
+
+
+
+def sortCharacters(word):
+    invalid =False
+    numeric =[]
+    upperCase = []
+    lowerCase = []
+    characters = split(word)
+    print(characters)
+    for char in characters:
+        if char.isdigit():
+            numeric.append(char)
+        elif char.isupper():
+            upperCase.append(char)
+        elif char.islower():
+            lowerCase.append(char)
+        else:
+            invalid=True
+            break
+    print(numeric)
+    print(upperCase)
+    print(lowerCase)
+    numeric.sort()
+    upperCase.sort()
+    lowerCase.sort()
+    sortedArray=numeric+upperCase+lowerCase
+    print(sortedArray)
 
 
 def main(argv):

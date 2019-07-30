@@ -7,9 +7,8 @@ def readFile(filename):
     file = open(filename, 'r')
     lines = file.read().splitlines();
     for line in lines:
-        print("nl")
-        print(line)
         word = line
+        print('input : '+word)
         sortCharacters(word)
 
 
@@ -20,7 +19,9 @@ def sortCharacters(word):
     upperCase = []
     lowerCase = []
     characters = split(word)
-    print(characters)
+    if(len(characters)==0):
+        print ("[Empty Input]\n")
+        return
     for char in characters:
         if char.isdigit():
             numeric.append(char)
@@ -31,15 +32,16 @@ def sortCharacters(word):
         else:
             invalid=True
             break
-    print(numeric)
-    print(upperCase)
-    print(lowerCase)
-    numeric.sort()
-    upperCase.sort()
-    lowerCase.sort()
-    sortedArray=numeric+upperCase+lowerCase
-    print(sortedArray)
-    print(permute(sortedArray))
+    if(invalid):
+        print('[Invalid Input]\n')
+    else:
+        numeric.sort()
+        upperCase.sort()
+        lowerCase.sort()
+        sortedArray=numeric+upperCase+lowerCase
+        permutationArray = permute(sortedArray)
+        output = ",".join(permutationArray)
+        print(output+'\n')
 
 def permute(lst):
     if len(lst)==0:
@@ -52,7 +54,6 @@ def permute(lst):
             consideredCharacter=lst[i]
             otherCharacters = lst[:i]+lst[i+1:]
             for permutation in permute(otherCharacters):
-                print(permutation)
                 permutedArray.append(consideredCharacter+permutation)
         return permutedArray
 
@@ -70,7 +71,7 @@ def main(argv):
         elif opt in ("-i", "--ifile"):
             inputfile = arg
 
-    print('Input file is "', inputfile)
+    print('Input file :'+ inputfile+'\n')
     readFile(inputfile)
 
 
